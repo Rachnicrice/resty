@@ -15,4 +15,4 @@ TBD
 
 #### UML
 
-[!RESTy-UML](./resty-uml.png)
+![RESTy-UML](./resty-uml.png)
