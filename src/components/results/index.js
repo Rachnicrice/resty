@@ -1,3 +1,5 @@
+import './results.scss';
+
 function Results (props) {
   return (
     <section>
