@@ -9,6 +9,8 @@ import Footer from './components/footer';
 import Form from './components/form';
 import Results from './components/results';
 
+import superagent from 'superagent';
+
 class App extends React.Component {
 
   constructor(props) {
@@ -20,15 +22,14 @@ class App extends React.Component {
   }
 
   callApi = (requestParams) => {
-    // mock output
-    const data = {
-      count: 2,
-      results: [
-        {name: 'fake thing 1', url: 'http://fakethings.com/1'},
-        {name: 'fake thing 2', url: 'http://fakethings.com/2'},
-      ],
-    };
-    this.setState({data, requestParams});
+    let method = requestParams.method.toUpperCase();
+    let url = requestParams.url;
+
+    superagent(method, url).end((err, res) => {
+      let data = res.body;
+      this.setState({data, requestParams});
+    });
+
   }
 
   render() {
