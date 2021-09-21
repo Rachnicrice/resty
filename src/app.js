@@ -19,6 +19,7 @@ class App extends React.Component {
       data: null,
       requestParams: {},
     };
+    this.myRef = React.createRef();
   }
 
   callApi = (requestParams) => {
@@ -26,7 +27,7 @@ class App extends React.Component {
     let url = requestParams.url;
 
     superagent(method, url).end((err, res) => {
-      let data = res.body;
+      const data = res.body;
       this.setState({data, requestParams});
     });
 
