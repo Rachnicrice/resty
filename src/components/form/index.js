@@ -33,10 +33,10 @@ function Form (props) {
           <button type="submit">GO!</button>
         </label>
         <label className="methods">
-          <span onClick={handleClick} id="get">GET</span>
-          <span onClick={handleClick} id="post">POST</span>
-          <span onClick={handleClick} id="put">PUT</span>
-          <span onClick={handleClick} id="delete">DELETE</span>
+          <span className={ method === 'get' ? 'active' : '' } onClick={handleClick} id="get">GET</span>
+          <span className={ method === 'post' ? 'active' : '' } onClick={handleClick} id="post">POST</span>
+          <span className={ method === 'put' ? 'active' : '' } onClick={handleClick} id="put">PUT</span>
+          <span className={ method === 'delete' ? 'active' : '' } onClick={handleClick} id="delete">DELETE</span>
         </label>
       </form>
     </>

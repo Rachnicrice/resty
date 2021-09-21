@@ -1,10 +1,13 @@
+$backgroundColor: #f5f5f5;
 
 section {
 
   display: flex;
   justify-content: center;
 
-  pre {
+  .pretty-json-container {
+    background: darken($backgroundColor, 3);
+    padding: 20px;
     margin-bottom: 30px;
   }
 
