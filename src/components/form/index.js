@@ -13,9 +13,9 @@ function Form (props) {
 
 
   function handleChange (e) {
-    const { value, id } = e.target;
+    const { name, value, id } = e.target;
     console.log('name ', e.target);
-    id ? setFormData({ ...formData, method: id }) : setFormData({ ...formData, url: value });
+    id ? setFormData({ ...formData, method: id }) : setFormData({ ...formData, [name]: value });
   }
 
   return (
@@ -31,6 +31,9 @@ function Form (props) {
           <span className={ formData.method === 'post' ? 'active' : '' } onClick={handleChange} id="post">POST</span>
           <span className={ formData.method === 'put' ? 'active' : '' } onClick={handleChange} id="put">PUT</span>
           <span className={ formData.method === 'delete' ? 'active' : '' } onClick={handleChange} id="delete">DELETE</span>
+        </label>
+        <label className="requestJson">
+          <input onChange={handleChange} name='data' type='text' />
         </label>
       </form>
     </>
