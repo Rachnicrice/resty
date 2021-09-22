@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 import './app.scss';
 
@@ -9,46 +10,29 @@ import Footer from './components/footer';
 import Form from './components/form';
 import Results from './components/results';
 
-import superagent from 'superagent';
+function App () {
 
-class App extends React.Component {
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      requestParams: {},
-      loading: false,
-    };
-  }
+  const callApi = async (requestParams) => {
+    setLoading(true);
+    let response = await axios(requestParams);
+    setData(response.data);
+    setLoading(false);
+  };
 
-  callApi = (requestParams) => {
-    let method = requestParams.method.toUpperCase();
-    let url = requestParams.url;
-
-    this.setState({loading: true});
-
-    superagent(method, url).end((err, res) => {
-      const data = res.body;
-      this.setState({data, requestParams});
-      this.setState({loading: false});
-    });
-
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <Header />
-        <div>Request Method: {this.state.requestParams.method}</div>
-        <div>URL: {this.state.requestParams.url}</div>
-        {this.state.loading ? <div>Loading...</div> : <div></div>}
-        <Form handleApiCall={this.callApi} />
-        <Results data={this.state.data} />
-        <Footer />
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      <Header />
+      <div>Request Method: {data.method}</div>
+      <div>URL: {data.url}</div>
+      {loading ? <div>Loading...</div> : <div></div>}
+      <Form handleApiCall={callApi} />
+      <Results data={data} />
+      <Footer />
+    </React.Fragment>
+  );
 }
 
 export default App;
