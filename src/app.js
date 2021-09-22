@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 
 import './app.scss';
@@ -13,14 +13,21 @@ import Results from './components/results';
 function App () {
 
   const [data, setData] = useState({});
+  const [request, setRequest] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const callApi = async (requestParams) => {
+  const callApi = (requestParams) => {
     setLoading(true);
-    let response = await axios(requestParams);
-    setData(response.data);
-    setLoading(false);
+    setRequest(requestParams);
   };
+
+  useEffect( async () => {
+    if (request) {
+      let response = await axios(request);
+      setData(response.data);
+      setLoading(false);
+    } 
+  }, [request]);
 
   return (
     <React.Fragment>
