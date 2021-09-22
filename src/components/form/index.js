@@ -14,7 +14,6 @@ function Form (props) {
 
   function handleChange (e) {
     const { name, value, id } = e.target;
-    console.log('name ', e.target);
     id ? setFormData({ ...formData, method: id }) : setFormData({ ...formData, [name]: value });
   }
 
