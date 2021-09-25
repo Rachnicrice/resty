@@ -10,6 +10,11 @@ import Footer from './components/footer';
 import Form from './components/form';
 import Results from './components/results';
 
+const initialState = {
+  activeState: {},
+  history: {},
+}
+
 function App () {
 
   const [data, setData] = useState({});
